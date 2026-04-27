@@ -5,16 +5,17 @@
  */
 
 import * as express from 'express';
-import { getAbsoluteFSPath } from 'swagger-ui-dist';
 import { ServeStaticOptions } from 'serve-static';
 import { interpolate } from '../../../mol-util/string';
 import { Handler } from 'express-serve-static-core';
 import { indexTemplate } from './indexTemplate';
+import { resolve } from 'path';
 
 export function swaggerUiAssetsHandler(options?: ServeStaticOptions): Handler {
     const opts = options || {};
     opts.index = false;
-    return express.static(getAbsoluteFSPath(), opts);
+    const path = resolve(__dirname);
+    return express.static(path, opts);
 }
 
 export interface SwaggerUIOptions {
